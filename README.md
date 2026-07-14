@@ -1,4 +1,4 @@
-# R-script\
+# R-script
 
 R Packages:\
 ggplot2\
