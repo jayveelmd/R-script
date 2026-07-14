@@ -8,4 +8,5 @@ Hmisc\
 survival\
 survminer\
 DescTools\
-ResourceSelection
+ResourceSelection\
+sqldf ##Manipulate R Data Frames Using SQL\
