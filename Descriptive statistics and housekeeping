@@ -13,15 +13,24 @@
 view(g) #Look at the whole dataset
 head(g) #Print the first few rows of your dataset: 
 dim(g) #See how many rows and columns you have in your dataset: 
+dimnames(g)[2] #similar to colnames, remove the 2 if you want to see name of rows:
 colnames(g) #Look at the different variables in the dataset: 
+str(g) #To visualise the structure of the data in a variable: 
+class(g$var) #Tells you what class (integer, character, factor)
+summary(g$var) #Will tell you any missing values
+range(g$var) #Will give NA NA output if there is a NA value in the data set
+range(g$var.,na.rm=TRUE) #overrides above
 print(variable) #Look at all the values in a variable: 
-str(variable) #To visualise the structure of the data in a variable: 
-variable[x] #Look at a specific value (x) in a variable: 
-
+subset(g,var1>x|var1<y)#See how many var1 values are >x and <y. | means 'and'
+variable[x] #Look at a specific value (x) in a variable:
+##Correlation tests - important insights for regression
+> plot(COPD$FEV1,COPD$MWT1Best,xlab="FEV1",ylab="MWT1Best")#Correlation plot
+> cor.test(COPD$FEV1, COPD$MWT1Best, use="complete.obs", method="pearson")#Pearson's correlation test
+> cor.test(COPD$FEV1, COPD$MWT1Best, use="complete.obs", method="spearman")#Spearman's correlation test
 
 
 ##Housekeeping
-
+  > par(mfrow=c(2,2))##Make graphs into quartiles (2x2)
   
 ##Categorical variables
 
@@ -32,7 +41,29 @@ table(g$var1var2) #view table
 g$var_title <- ifelse(g$var1var2 >= 5, 1, 0) # To create a new binary variable, whether the sum of var1 and var2 is 5 or more, give a value of 1, otherwise 0.
 table(g$var_title) #view table
 
-  > par(mfrow=c(2,2))##Make graphs into quartiles (2x2)
+##Assigning names
+fruit <- g[,'fruit']
+veg <- g[,'veg']
+fruitveg <- fruit + veg
+table(fruitveg)
+smoking <- g[,'smoking']
+age <- g[,'age']
+cancer <- g[,'cancer']
+g$five_a_day <- ifelse(g$fruitveg >= 5, 1, 0)
+
+#Formatting variables to categorical - R  thinks variables are continuous by default
+#For categorical variables
+gender <- as.factor(g[,”gender”]) # but gender isn’t.
+dm <- as.factor(g[,”dm”]) # neither is dm
+t <- table(gender) # store the tabulation for further manipulation
+addmargins(t) # this will sum up the gender totals to give an overall total and print the results
+round(prop.table(t),digits=3) # get proportions rounded to 3dp
+	OR
+round(100*prop.table(t),digits=1) # get %s rounded to 1dp
+table(dm) #excludes missing values by default, so add the exclude=null option
+dm2 <- factor(dm, exclude=NULL) #make a factor from the old one
+table(dm2) #shows NA
+
 
 ##Continuous variables
 summary(variable)
