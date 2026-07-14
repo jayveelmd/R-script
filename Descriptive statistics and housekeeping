@@ -1,0 +1,73 @@
+##Resetting environments and importing data script
+> rm(list=ls())#Resets data environments\
+
+##Installing a package
+> install.packages(“Package name”) 
+> library(Package name) 
+
+##Importing data sets
+> getwd()
+> g <- read.csv("C:/Users/Jayvee Llor/Desktop/ICL/cancer data for MOOC 1.csv", header = TRUE,sep = ",")
+  
+##Descriptive statistics
+view(g) #Look at the whole dataset
+head(g) #Print the first few rows of your dataset: 
+dim(g) #See how many rows and columns you have in your dataset: 
+colnames(g) #Look at the different variables in the dataset: 
+print(variable) #Look at all the values in a variable: 
+str(variable) #To visualise the structure of the data in a variable: 
+variable[x] #Look at a specific value (x) in a variable: 
+
+
+
+##Housekeeping
+
+  
+##Categorical variables
+
+g$healthy_BMI <- ifelse(g$bmi > 18.5 & g$bmi < 25, 1, 0) # To create a new binary variable `healthy_BMI`, whether the patient has a healthy BMI or not: 
+table(g$healthy_BMI) #view table
+g$var1var2 <- g$var1 + g$var # Creating a new variable, which is the sum of var1 and var2 of each patient
+table(g$var1var2) #view table
+g$var_title <- ifelse(g$var1var2 >= 5, 1, 0) # To create a new binary variable, whether the sum of var1 and var2 is 5 or more, give a value of 1, otherwise 0.
+table(g$var_title) #view table
+
+  > par(mfrow=c(2,2))##Make graphs into quartiles (2x2)
+
+##Continuous variables
+summary(variable)
+describe(variable)
+hist(variable)
+range(variable)
+IQR(variable)
+sd(variable)
+subset(variable1, variable2 >=/=<)
+##Graphs for continuous variables
+hist(variable,
+     main="Histogram Title",
+     xlab="X-axis title",ylab="Y-axis title",
+     axes=F)
+     axis(side = 1, at = seq(0, 11, 1)) #adjust parameters of x axis, start a 0, end at 11, bins size =1)
+     axis(side = 2, at = seq(0, 16, 2)) #adjust parameters of y axis, start at00, end at 16, bins size=2)
+plot(variable1,variable2,
+     main="Plot Title", 
+     xlab="X-axis title",ylab="Y-axis title"
+    )
+ggplot()+geom_histogram(data=g,aes(x=fruit),
+                        bins=5,
+                        fill="$Bar graph colour$",col="$Outline colour$")
+                        +theme_bw()
+                        +labs(x="X-axis title",y="Y-axis title")
+                        +scale_x_continuous(breaks=seq(from=0,to=4,by=1))")
+ggplot()+geom_histogram(data=g,aes(x=veg),
+                        bins=10,
+                        fill="$Bar graph colour$",col="$Outline colour$")
+                        +theme_bw()
+                        +labs(x="Portions of veg",y="Y-axis title")
+                        +scale_x_continuous(breaks=seq(from=0,to=9,by=1))")
+
+##Categorical variables
+describe(variable)
+CrossTable(
+sum(is.na(variable))
+table(catvariable)
