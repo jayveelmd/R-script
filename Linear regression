@@ -1,0 +1,25 @@
+Assumptions for linear regression
+
+##Tests for linear regression
+> chisq.test(x=g$five_a_day,y=cancer) #Pearson's Chi-squared test with Yates' continuity correction
+> t.test(bmi~cancer) #Welch's test
+> t.test(bmi~cancer, var.equal=TRUE) #Two-sample t-test
+> t.test(bmi,mu=25)#One sample t-test
+g$overweight <- ifelse(g$bmi > 25,1,0)#defining overweight
+> chisq.test(x=g$overweight,y=cancer)#running the chi-squared test
+
+
+            ##COPD student dataset
+COPD <- read.csv("C:/Users/Jayvee Llor/Desktop/ICL/COPD_student_dataset.csv", header = TRUE, sep = ",")#Read the file
+##Descriptive statistics
+> dim(COPD)#shows numbers of rows and columns
+> head(COPD)#Look at what variables there are - continuous, binary, categorical
+> class(COPD$*VAR*)#where *VAR* is a variable. It will tell you what class it is; integer, character,
+> str(COPD)#is better than above
+> colnames(COPD)#View data set's variables
+> summary(COPD$MWT1Best)#Will tell you any missing values
+> range(COPD$MWT1Best)##Gives output of NA NA as there is a NA value in the data set
+> range(COPD$MWT1Best,na.rm=TRUE)##Overrides this
+> COPD$gender <- as.factor(COPD$gender)#Re-registering a variable as a factor (categorical) instead of an integer
+> hist(COPD$MWT1Best,main="Histogram of MWT1BEST",xlab="MWT1BEST",breaks=12)#Create histogram, give title, x axis label and how many bars in bar graph=12
+> subset(COPD,MWT1Best>650|MWT1Best<150)#See how many MWT1Best values >650 and <150. | means 'AND'
